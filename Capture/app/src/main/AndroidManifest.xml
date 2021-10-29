@@ -11,7 +11,9 @@
 
          <uses-feature android:name="android.hardware.camera" />
          <uses-feature android:name="android.hardware.camera.autofocus" />
-        -->
+    -->
+    <!-- 允许在其他应用上显示对话框权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -45,6 +47,7 @@
 
         <activity android:name=".Second_Activity" />
         <activity android:name=".Image_album_showActivity" />
+
     </application>
 
 </manifest>

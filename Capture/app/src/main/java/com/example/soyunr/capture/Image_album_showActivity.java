@@ -84,12 +84,12 @@ public class Image_album_showActivity extends AppCompatActivity {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 startActivityForResult(intent, TAKE_PHOTO);*/
 
-                try {// 将拍摄的照片显示出来
+                /*try {// 将拍摄的照片显示出来
                     Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                     picture.setImageBitmap(bitmap);
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
+                }*/
             }
             break;
             //如果传递为CHOOSE_PHOTO
@@ -109,9 +109,18 @@ public class Image_album_showActivity extends AppCompatActivity {
         }
     }
     private void openAlbum() {
-        Intent intent = new Intent("android.intent.action.GET_CONTENT");
+        Intent intent = new Intent();
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
-        startActivityForResult(intent, CHOOSE_PHOTO); // 打开相册
+        if (Build.VERSION.SDK_INT <19) {
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+        }else {
+            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+        }
+        startActivityForResult(intent, CHOOSE_PHOTO);
+        /*Intent intent = new Intent("android.intent.action.GET_CONTENT");
+        intent.setType("image/*");
+        startActivityForResult(intent, CHOOSE_PHOTO); // 打开相册*/
     }
 
     private void openCamera(){

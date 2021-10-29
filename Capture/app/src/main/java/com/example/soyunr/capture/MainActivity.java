@@ -1,9 +1,11 @@
 package com.example.soyunr.capture;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -15,6 +17,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,10 +26,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.MediaController;
-import android.widget.Toast;
-import android.widget.VideoView;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -121,5 +122,60 @@ public class MainActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_second_);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        //用户设置允许在其他应用上显示的权限，启动服务
+        if(requestCode == 0x102)
+        {
+
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        {
+            //用户设置允许使用相机的权限，则检查是否设置允许在其他应用上显示的权限
+            if(requestCode == 0x101)
+            {
+
+            }
+        }
+    }
+
+    private void openPermission(Activity activity, String permission, int requestCode)
+    {
+        try
+        {
+            ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
+        }catch (Exception e){}
+    }
+
+
+    private boolean myCheckPermission(Context context, String permission)
+    {
+        try
+        {
+            if (ContextCompat.checkSelfPermission(context, permission)
+                    == PackageManager.PERMISSION_GRANTED)
+            {
+                return true;
+            }
+        }
+        catch (Exception e){}
+        return false;
     }
 }
