@@ -11,16 +11,16 @@
         android:text="Take Photos" />
 
     <Button
-        android:id="@+id/take_video"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Take videos" />
-
-    <Button
         android:id="@+id/choose_from_album"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Choose From Album" />
+
+    <Button
+        android:id="@+id/take_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Take videos" />
 
     <Button
         android:id="@+id/show_videos"
